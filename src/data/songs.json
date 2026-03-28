@@ -1,0 +1,90 @@
+[
+  {
+    "id": "twinkle-twinkle",
+    "title": "Twinkle Twinkle Little Star",
+    "author": "Traditional",
+    "category": "Clasicas",
+    "difficulty": 1,
+    "notes": "Do Do Sol Sol La La Sol/b | Fa Fa Mi Mi Re Re Do/b | Sol Sol Fa Fa Mi Mi Re/b | Sol Sol Fa Fa Mi Mi Re/b | Do Do Sol Sol La La Sol/b | Fa Fa Mi Mi Re Re Do/b"
+  },
+  {
+    "id": "cumpleanos-feliz",
+    "title": "Cumpleaños Feliz",
+    "author": "Traditional",
+    "category": "Clasicas",
+    "difficulty": 1,
+    "notes": "Sol/c Sol/c La Sol Do5 Si/b | Sol/c Sol/c La Sol Re5 Do5/b | Sol/c Sol/c Sol5 Mi5 Do5 Si La | Fa5/c Fa5/c Mi5 Do5 Re5 Do5/b"
+  },
+  {
+    "id": "frere-jacques",
+    "title": "Frère Jacques",
+    "author": "Traditional",
+    "category": "Infantiles",
+    "difficulty": 1,
+    "notes": "Do Re Mi Do | Do Re Mi Do | Mi Fa Sol/b | Mi Fa Sol/b | Sol/c La/c Sol/c Fa/c Mi Do | Sol/c La/c Sol/c Fa/c Mi Do | Do Sol3 Do/b | Do Sol3 Do/b"
+  },
+  {
+    "id": "mary-had-a-little-lamb",
+    "title": "Mary Had a Little Lamb",
+    "author": "Traditional",
+    "category": "Infantiles",
+    "difficulty": 1,
+    "notes": "Mi Re Do Re Mi Mi Mi/b | Re Re Re/b | Mi Sol Sol/b | Mi Re Do Re Mi Mi Mi | Mi Re Re Mi Re Do/b"
+  },
+  {
+    "id": "ode-to-joy",
+    "title": "Ode to Joy",
+    "author": "Beethoven",
+    "category": "Clasicas",
+    "difficulty": 2,
+    "notes": "Mi Mi Fa Sol | Sol Fa Mi Re | Do Do Re Mi | Mi Re Re/b | Mi Mi Fa Sol | Sol Fa Mi Re | Do Do Re Mi | Re Do Do/b"
+  },
+  {
+    "id": "jingle-bells",
+    "title": "Jingle Bells",
+    "author": "Traditional",
+    "category": "Navidad",
+    "difficulty": 1,
+    "notes": "Mi Mi Mi/b | Mi Mi Mi/b | Mi Sol Do Re Mi/r | Fa Fa Fa Fa Fa Mi Mi Mi/c Mi/c | Mi Re Re Mi Re Sol/b"
+  },
+  {
+    "id": "london-bridge",
+    "title": "London Bridge",
+    "author": "Traditional",
+    "category": "Infantiles",
+    "difficulty": 1,
+    "notes": "Sol La Sol Fa Mi Fa Sol/b | Re Mi Fa/b | Mi Fa Sol/b | Sol La Sol Fa Mi Fa Sol/b | Re Sol Mi Do/b"
+  },
+  {
+    "id": "row-row-row",
+    "title": "Row Row Row Your Boat",
+    "author": "Traditional",
+    "category": "Infantiles",
+    "difficulty": 1,
+    "notes": "Do Do Do Re Mi/b | Mi Re Mi Fa Sol/r | Do5/c Do5/c Do5/c Sol/c Sol/c Sol/c Mi/c Mi/c Mi/c Do/c Do/c Do/c | Sol Fa Mi Re Do/r"
+  },
+  {
+    "id": "hot-cross-buns",
+    "title": "Hot Cross Buns",
+    "author": "Traditional",
+    "category": "Infantiles",
+    "difficulty": 1,
+    "notes": "Mi Re Do/b | Mi Re Do/b | Do Do Re Re Mi Re Do/b"
+  },
+  {
+    "id": "au-clair-de-la-lune",
+    "title": "Au Clair de la Lune",
+    "author": "Traditional",
+    "category": "Clasicas",
+    "difficulty": 1,
+    "notes": "Do Do Do Re Mi/b Re/b | Do Mi Re Re Do/r | Do Do Do Re Mi/b Re/b | Do Mi Re Re Do/r"
+  },
+  {
+    "id": "lambada",
+    "title": "La Lambada",
+    "author": "Kaoma",
+    "category": "Clasicas",
+    "difficulty": 2,
+    "notes": "-/c Mi5 Mi5/c Re5/c Do5/c Si/c | La/c Si/c Do5/c Si/c La/c Sol/c Si/c | La/c Sol/c Fa/c Sol/c Mi/b | -/c Mi5 Mi5/c Re5/c Do5/c Si/c | La/c Si/c Do5/c Si/c La/c Sol/c Si/c | La/c Sol/c Fa/c Sol/c Mi/b | -/c Mi5 Mi5/c Mi5/c Re5/c Do5/c Si/c | La/c Si/c Do5/c Si/c La/c Sol/c Si/c | La/c Sol/c Fa/c Sol/c Mi/b | -/c Si/c Do5/c Si/c La/c Sol/c La/c Si/c | La/c Sol/c Fa/c Sol/c Fa/c Mi/c Fa/c Sol/c | Fa/c Mi/c Re/c Mi/c Mi/b | Mi/c Sol/c Si/c Mi/c Sol/c Si/c Mi/c Sol/c | Sol/c Si/c Re5/c Sol/c Si/c Re5/c Sol/c Si/c | Mi/c Sol/c Si/c Mi/c Sol/c Si/c Mi/c Sol/c | Sol/c Si/c Re5/c Sol/c Si/c Re5/c Sol/c Si/c | Mi5 Mi5/c Re5/c Do5/c Si/c | La/c Si/c Do5/c Si/c La/c Sol/c Si/c | La/c Sol/c Fa/c Sol/c Mi/b | -/c Si/c Do5/c Si/c La/c Sol/c La/c Si/c | La/c Sol/c Fa/c Sol/c Fa/c Mi/c Fa/c Sol/c | Fa/c Mi/c Re/c Mi/c Mi/b -"
+  }
+]
