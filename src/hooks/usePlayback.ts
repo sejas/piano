@@ -71,7 +71,7 @@ export function usePlayback(elements: MusicElement[]) {
 
       const el = elements[startIndex];
 
-      if (el.type === "barline") {
+      if (el.type === "barline" || el.type === "linebreak") {
         setState((s) => ({ ...s, currentIndex: startIndex }));
         timeoutRef.current = window.setTimeout(
           () => playSequence(startIndex + 1),

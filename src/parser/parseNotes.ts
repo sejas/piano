@@ -28,6 +28,10 @@ function parseToken(
 ):
   | { element: MusicElement; error: null }
   | { element: null; error: ParseError } {
+  if (token === "||") {
+    return { element: { type: "linebreak" }, error: null };
+  }
+
   if (token === "|") {
     return { element: { type: "barline" }, error: null };
   }

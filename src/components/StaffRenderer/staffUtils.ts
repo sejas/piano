@@ -77,6 +77,12 @@ export function layoutNotes(
   let staffLine = 0;
 
   elements.forEach((el, index) => {
+    if (el.type === "linebreak") {
+      staffLine++;
+      currentX = STAFF_CONFIG.staffLeftMargin;
+      return;
+    }
+
     if (el.type === "barline") {
       layout.push({ elementIndex: index, x: currentX, y: 0, staffLine });
       currentX += 20;

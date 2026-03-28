@@ -18,7 +18,11 @@ export interface BarLine {
   type: "barline";
 }
 
-export type MusicElement = Note | Rest | BarLine;
+export interface LineBreak {
+  type: "linebreak";
+}
+
+export type MusicElement = Note | Rest | BarLine | LineBreak;
 
 export interface Song {
   id: string;

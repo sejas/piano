@@ -43,19 +43,41 @@ function renderStaffLines(offsetY: number, width: number) {
 }
 
 function renderTrebleClef(offsetY: number) {
-  const clefY =
-    offsetY + STAFF_CONFIG.topLineY + 4 * STAFF_CONFIG.lineSpacing + 8;
+  // Position: the curl of the clef wraps around the G line (second line from bottom)
+  // G4 line is at topLineY + 3 * lineSpacing
+  const gLineY = STAFF_CONFIG.topLineY + 3 * STAFF_CONFIG.lineSpacing;
+  const clefX = 6;
+  const scale = STAFF_CONFIG.lineSpacing / 10; // scale relative to 10px spacing
+
   return (
-    <text
+    <g
       key={`clef-${offsetY}`}
-      x={8}
-      y={clefY}
-      fontSize={52}
-      fontFamily="serif"
-      fill="#333"
+      transform={`translate(${clefX}, ${offsetY + gLineY}) scale(${scale})`}
     >
-      𝄞
-    </text>
+      <path
+        d={
+          // Treble clef SVG path centered on G line (y=0)
+          "M 10 32 " +
+          "C 10 28, 14 20, 18 14 " + // lower curve up
+          "C 22 8, 24 2, 22 -6 " + // rising to top
+          "C 20 -14, 16 -20, 12 -26 " + // top curve
+          "C 8 -32, 6 -38, 8 -44 " + // upper extension
+          "C 10 -50, 14 -52, 18 -48 " + // top curl
+          "C 22 -44, 20 -38, 16 -32 " + // descend from top
+          "C 12 -26, 10 -20, 10 -12 " + // through middle
+          "C 10 -4, 14 4, 20 8 " + // S curve down
+          "C 26 12, 30 16, 30 22 " + // lower belly
+          "C 30 28, 26 34, 20 36 " + // bottom curve
+          "C 14 38, 8 36, 6 32 " + // close bottom
+          "C 4 28, 6 24, 10 24 " + // inner curl
+          "C 14 24, 16 28, 14 30 " + // small circle
+          "C 12 32, 10 32, 10 32 Z" // close
+        }
+        fill="#333"
+      />
+      {/* Vertical stem line */}
+      <line x1={16} y1={-52} x2={16} y2={36} stroke="#333" strokeWidth={1.8} />
+    </g>
   );
 }
 
