@@ -1,73 +1,41 @@
-# React + TypeScript + Vite
+# Piano Partituras
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Color-coded piano sheet music app for kids. Write, browse, play, and print partituras with colored notes.
 
-Currently, two official plugins are available:
+**Live:** https://sejas.github.io/piano/
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Features
 
-## React Compiler
+- **Color-coded staff** — real 5-line pentagrama with colored note heads (Do=red, Re=purple, Mi=dark blue, Fa=light blue, Sol=green, La=yellow, Si=orange)
+- **Text editor with live preview** — type notes in Spanish (Do Re Mi) or English (C D E) and see the staff update in real-time
+- **Piano keyboard** — click keys or use keyboard shortcuts (A-J for octave 4, Q-U for octave 5)
+- **Playback** — synthesized piano sound with adjustable tempo (60-180 BPM)
+- **Song browser** — 11 built-in kids' songs (Twinkle Twinkle, Cumpleanos Feliz, La Lambada, etc.)
+- **PDF export** — printable A4 pages with title, staff, color legend, and keyboard diagram
+- **Customizable colors** — change any note's color in Settings
+- **Offline** — fully client-side, saves to localStorage
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Note Syntax
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```
+Do Re Mi Fa Sol La Si     (Spanish, default octave 4, quarter note)
+C D E F G A B             (English)
+Do5 Re3                   (explicit octave)
+Do/b Re/c Mi/r            (duration: r=whole, b=half, n=quarter, c=eighth)
+Do5/b                     (octave + duration)
+|                         (bar line)
+-                         (rest, e.g. -/b for half rest)
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Development
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
+npm run dev       # start dev server
+npm run test:run  # run tests
+npm run build     # production build
 ```
+
+## Tech Stack
+
+React 18, Vite, TypeScript, Web Audio API, jsPDF + svg2pdf.js, localStorage
