@@ -12,7 +12,7 @@ export interface ParseResult {
   errors: ParseError[];
 }
 
-const VALID_DURATIONS = new Set(["r", "b", "n", "c"]);
+const VALID_DURATIONS = new Set(["r", "b", "n", "c", "s"]);
 const VALID_OCTAVES = new Set([3, 4, 5, 6]);
 
 function resolveNoteName(raw: string): NoteName | null {

@@ -1,5 +1,5 @@
 export type NoteName = "Do" | "Re" | "Mi" | "Fa" | "Sol" | "La" | "Si";
-export type Duration = "r" | "b" | "n" | "c";
+export type Duration = "r" | "b" | "n" | "c" | "s";
 export type Octave = 3 | 4 | 5 | 6;
 
 export interface Note {

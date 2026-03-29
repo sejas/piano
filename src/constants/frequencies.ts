@@ -19,7 +19,9 @@ export function getFrequency(
   return 440 * Math.pow(2, (midiNote - 69) / 12);
 }
 
-export function getDurationBeats(duration: "r" | "b" | "n" | "c"): number {
-  const beats: Record<string, number> = { r: 4, b: 2, n: 1, c: 0.5 };
+export function getDurationBeats(
+  duration: "r" | "b" | "n" | "c" | "s",
+): number {
+  const beats: Record<string, number> = { r: 4, b: 2, n: 1, c: 0.5, s: 0.25 };
   return beats[duration];
 }

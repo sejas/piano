@@ -21,6 +21,7 @@ const REST_SYMBOLS: Record<string, string> = {
   b: "𝄼", // half rest
   n: "𝄽", // quarter rest
   c: "𝄾", // eighth rest
+  s: "𝄿", // sixteenth rest
 };
 
 function renderStaffLines(offsetY: number, width: number) {
@@ -221,13 +222,15 @@ function renderNote(
       />,
     );
 
-    // Flag for eighth notes (corchea)
-    if (duration === "c") {
+    // Flags for eighth (corchea) and sixteenth (semicorchea) notes
+    const flagCount = duration === "s" ? 2 : duration === "c" ? 1 : 0;
+    for (let f = 0; f < flagCount; f++) {
+      const flagOffset = f * 8 * (stemDir === "up" ? 1 : -1);
       if (stemDir === "up") {
         elements.push(
           <path
-            key={`${key}-flag`}
-            d={`M ${stemX} ${stemY2} C ${stemX + 14} ${stemY2 + 8}, ${stemX + 16} ${stemY2 + 20}, ${stemX + 4} ${stemY2 + 30}`}
+            key={`${key}-flag-${f}`}
+            d={`M ${stemX} ${stemY2 + flagOffset} C ${stemX + 14} ${stemY2 + flagOffset + 8}, ${stemX + 16} ${stemY2 + flagOffset + 20}, ${stemX + 4} ${stemY2 + flagOffset + 30}`}
             fill="none"
             stroke={color}
             strokeWidth={1.5}
@@ -236,8 +239,8 @@ function renderNote(
       } else {
         elements.push(
           <path
-            key={`${key}-flag`}
-            d={`M ${stemX} ${stemY2} C ${stemX + 14} ${stemY2 - 8}, ${stemX + 16} ${stemY2 - 20}, ${stemX + 4} ${stemY2 - 30}`}
+            key={`${key}-flag-${f}`}
+            d={`M ${stemX} ${stemY2 + flagOffset} C ${stemX + 14} ${stemY2 + flagOffset - 8}, ${stemX + 16} ${stemY2 + flagOffset - 20}, ${stemX + 4} ${stemY2 + flagOffset - 30}`}
             fill="none"
             stroke={color}
             strokeWidth={1.5}
