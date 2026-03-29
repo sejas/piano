@@ -10,8 +10,12 @@ const SEMITONE_OFFSET: Record<NoteName, number> = {
   Si: 11,
 };
 
-export function getFrequency(name: NoteName, octave: Octave): number {
-  const midiNote = (octave + 1) * 12 + SEMITONE_OFFSET[name];
+export function getFrequency(
+  name: NoteName,
+  octave: Octave,
+  sharp?: boolean,
+): number {
+  const midiNote = (octave + 1) * 12 + SEMITONE_OFFSET[name] + (sharp ? 1 : 0);
   return 440 * Math.pow(2, (midiNote - 69) / 12);
 }
 

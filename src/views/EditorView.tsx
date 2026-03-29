@@ -50,18 +50,24 @@ export function EditorView({
     if (playback.currentIndex < 0 || playback.currentIndex >= elements.length)
       return null;
     const el = elements[playback.currentIndex];
-    if (el.type === "note") return { name: el.name, octave: el.octave };
+    if (el.type === "note")
+      return { name: el.name, octave: el.octave, sharp: el.sharp };
     return null;
   }, [playback.currentIndex, elements]);
 
-  const handlePianoNote = useCallback((name: NoteName, octave: Octave) => {
-    const noteStr = octave === 4 ? name : `${name}${octave}`;
-    setNotesText((prev) => {
-      if (!prev || prev.endsWith(" ") || prev.endsWith("\n"))
-        return prev + noteStr;
-      return prev + " " + noteStr;
-    });
-  }, []);
+  const handlePianoNote = useCallback(
+    (name: NoteName, octave: Octave, sharp?: boolean) => {
+      const sharpStr = sharp ? "#" : "";
+      const octStr = octave === 4 ? "" : String(octave);
+      const noteStr = `${name}${sharpStr}${octStr}`;
+      setNotesText((prev) => {
+        if (!prev || prev.endsWith(" ") || prev.endsWith("\n"))
+          return prev + noteStr;
+        return prev + " " + noteStr;
+      });
+    },
+    [],
+  );
 
   const handleDeleteLastNote = useCallback(() => {
     setNotesText((prev) => {

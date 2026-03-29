@@ -105,6 +105,33 @@ describe("parseNotes", () => {
     ]);
   });
 
+  it("parses sharp notes in Spanish", () => {
+    const result = parseNotes("Do# Re# Fa#");
+    expect(result.elements).toEqual([
+      { type: "note", name: "Do", sharp: true, octave: 4, duration: "n" },
+      { type: "note", name: "Re", sharp: true, octave: 4, duration: "n" },
+      { type: "note", name: "Fa", sharp: true, octave: 4, duration: "n" },
+    ]);
+    expect(result.errors).toEqual([]);
+  });
+
+  it("parses sharp notes in English", () => {
+    const result = parseNotes("C# D# F#");
+    expect(result.elements).toEqual([
+      { type: "note", name: "Do", sharp: true, octave: 4, duration: "n" },
+      { type: "note", name: "Re", sharp: true, octave: 4, duration: "n" },
+      { type: "note", name: "Fa", sharp: true, octave: 4, duration: "n" },
+    ]);
+  });
+
+  it("parses sharp with octave and duration", () => {
+    const result = parseNotes("Do#5/b C#3/c");
+    expect(result.elements).toEqual([
+      { type: "note", name: "Do", sharp: true, octave: 5, duration: "b" },
+      { type: "note", name: "Do", sharp: true, octave: 3, duration: "c" },
+    ]);
+  });
+
   it("handles empty input", () => {
     const result = parseNotes("");
     expect(result.elements).toEqual([]);

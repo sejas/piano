@@ -5,6 +5,7 @@ export type Octave = 3 | 4 | 5 | 6;
 export interface Note {
   type: "note";
   name: NoteName;
+  sharp?: boolean;
   octave: Octave;
   duration: Duration;
 }

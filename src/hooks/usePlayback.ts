@@ -88,7 +88,7 @@ export function usePlayback(elements: MusicElement[]) {
       setState((s) => ({ ...s, currentIndex: startIndex }));
 
       if (el.type === "note") {
-        const freq = getFrequency(el.name, el.octave);
+        const freq = getFrequency(el.name, el.octave, el.sharp);
         playNote(freq, durationSec);
       }
 

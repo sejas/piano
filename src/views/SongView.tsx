@@ -24,7 +24,8 @@ export function SongView({ song, colors, onEdit }: SongViewProps) {
     if (playback.currentIndex < 0 || playback.currentIndex >= elements.length)
       return null;
     const el = elements[playback.currentIndex];
-    if (el.type === "note") return { name: el.name, octave: el.octave };
+    if (el.type === "note")
+      return { name: el.name, octave: el.octave, sharp: el.sharp };
     return null;
   }, [playback.currentIndex, elements]);
 

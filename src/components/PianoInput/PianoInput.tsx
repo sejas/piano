@@ -4,13 +4,13 @@ import { NOTE_ORDER } from "../../constants/noteNames";
 
 interface PianoInputProps {
   colors: ColorMap;
-  onNoteClick: (name: NoteName, octave: Octave) => void;
+  onNoteClick: (name: NoteName, octave: Octave, sharp?: boolean) => void;
   onDeleteLastNote?: () => void;
-  onPlayNote?: (name: NoteName, octave: Octave) => void;
-  activeNote?: { name: NoteName; octave: Octave } | null;
+  onPlayNote?: (name: NoteName, octave: Octave, sharp?: boolean) => void;
+  activeNote?: { name: NoteName; octave: Octave; sharp?: boolean } | null;
 }
 
-// Computer keyboard → note mapping
+// Computer keyboard → note mapping (white keys)
 const KEY_MAP: Record<string, { name: NoteName; octave: Octave }> = {
   a: { name: "Do", octave: 4 },
   s: { name: "Re", octave: 4 },
@@ -28,6 +28,20 @@ const KEY_MAP: Record<string, { name: NoteName; octave: Octave }> = {
   u: { name: "Si", octave: 5 },
 };
 
+// Shift+key → sharp note (only notes that have sharps)
+const SHARP_KEY_MAP: Record<string, { name: NoteName; octave: Octave }> = {
+  a: { name: "Do", octave: 4 },
+  s: { name: "Re", octave: 4 },
+  f: { name: "Fa", octave: 4 },
+  g: { name: "Sol", octave: 4 },
+  h: { name: "La", octave: 4 },
+  q: { name: "Do", octave: 5 },
+  w: { name: "Re", octave: 5 },
+  r: { name: "Fa", octave: 5 },
+  t: { name: "Sol", octave: 5 },
+  y: { name: "La", octave: 5 },
+};
+
 const WHITE_KEY_WIDTH = 44;
 const WHITE_KEY_HEIGHT = 100;
 const BLACK_KEY_WIDTH = 28;
@@ -35,7 +49,7 @@ const BLACK_KEY_HEIGHT = 62;
 
 const HAS_SHARP: Set<NoteName> = new Set(["Do", "Re", "Fa", "Sol", "La"]);
 
-// Keyboard shortcut labels for each note+octave
+// Keyboard shortcut labels
 const KEY_LABELS: Record<string, string> = {
   "Do-4": "A",
   "Re-4": "S",
@@ -53,13 +67,18 @@ const KEY_LABELS: Record<string, string> = {
   "Si-5": "U",
 };
 
-function isActiveKey(
-  name: NoteName,
-  octave: Octave,
-  activeNote?: { name: NoteName; octave: Octave } | null,
-): boolean {
-  return activeNote?.name === name && activeNote?.octave === octave;
-}
+const SHARP_KEY_LABELS: Record<string, string> = {
+  "Do#-4": "⇧A",
+  "Re#-4": "⇧S",
+  "Fa#-4": "⇧F",
+  "Sol#-4": "⇧G",
+  "La#-4": "⇧H",
+  "Do#-5": "⇧Q",
+  "Re#-5": "⇧W",
+  "Fa#-5": "⇧R",
+  "Sol#-5": "⇧T",
+  "La#-5": "⇧Y",
+};
 
 export function PianoInput({
   colors,
@@ -70,7 +89,6 @@ export function PianoInput({
 }: PianoInputProps) {
   const handleKeyDown = useCallback(
     (e: KeyboardEvent) => {
-      // Don't capture when typing in an input/textarea
       if (
         e.target instanceof HTMLInputElement ||
         e.target instanceof HTMLTextAreaElement
@@ -82,14 +100,28 @@ export function PianoInput({
         onDeleteLastNote();
         return;
       }
-      const mapping = KEY_MAP[e.key.toLowerCase()];
+
+      const key = e.key.toLowerCase();
+
+      // Shift+key = sharp
+      if (e.shiftKey) {
+        const mapping = SHARP_KEY_MAP[key];
+        if (mapping) {
+          e.preventDefault();
+          onNoteClick(mapping.name, mapping.octave, true);
+          onPlayNote?.(mapping.name, mapping.octave, true);
+          return;
+        }
+      }
+
+      const mapping = KEY_MAP[key];
       if (mapping) {
         e.preventDefault();
         onNoteClick(mapping.name, mapping.octave);
         onPlayNote?.(mapping.name, mapping.octave);
       }
     },
-    [onNoteClick],
+    [onNoteClick, onDeleteLastNote, onPlayNote],
   );
 
   useEffect(() => {
@@ -108,6 +140,11 @@ export function PianoInput({
 
   const totalWidth = keys.length * WHITE_KEY_WIDTH;
 
+  const isActive = (name: NoteName, octave: Octave, sharp?: boolean) =>
+    activeNote?.name === name &&
+    activeNote?.octave === octave &&
+    !!activeNote?.sharp === !!sharp;
+
   return (
     <div
       style={{
@@ -123,7 +160,7 @@ export function PianoInput({
       >
         {/* White keys */}
         {keys.map((key) => {
-          const active = isActiveKey(key.name, key.octave, activeNote);
+          const active = isActive(key.name, key.octave);
           const label = KEY_LABELS[`${key.name}-${key.octave}`];
           return (
             <g
@@ -183,18 +220,52 @@ export function PianoInput({
         {/* Black keys */}
         {keys.map((key) => {
           if (!HAS_SHARP.has(key.name)) return null;
+          const bx = key.x + WHITE_KEY_WIDTH - BLACK_KEY_WIDTH / 2;
+          const active = isActive(key.name, key.octave, true);
+          const label = SHARP_KEY_LABELS[`${key.name}#-${key.octave}`];
           return (
-            <rect
+            <g
               key={`black-${key.name}-${key.octave}`}
-              x={key.x + WHITE_KEY_WIDTH - BLACK_KEY_WIDTH / 2}
-              y={0}
-              width={BLACK_KEY_WIDTH}
-              height={BLACK_KEY_HEIGHT}
-              fill="#333"
-              stroke="#000"
-              strokeWidth={1}
-              rx={2}
-            />
+              onClick={(e) => {
+                e.stopPropagation();
+                onNoteClick(key.name, key.octave, true);
+                onPlayNote?.(key.name, key.octave, true);
+              }}
+              style={{ cursor: "pointer" }}
+            >
+              <rect
+                x={bx}
+                y={0}
+                width={BLACK_KEY_WIDTH}
+                height={BLACK_KEY_HEIGHT}
+                fill={active ? colors[key.name] : "#333"}
+                stroke="#000"
+                strokeWidth={1}
+                rx={2}
+              />
+              {/* Sharp label on key */}
+              <text
+                x={bx + BLACK_KEY_WIDTH / 2}
+                y={BLACK_KEY_HEIGHT - 8}
+                textAnchor="middle"
+                fontSize="9"
+                fill={active ? "white" : "#aaa"}
+              >
+                {key.name}#
+              </text>
+              {/* Keyboard shortcut */}
+              {label && (
+                <text
+                  x={bx + BLACK_KEY_WIDTH / 2}
+                  y={BLACK_KEY_HEIGHT - 20}
+                  textAnchor="middle"
+                  fontSize="8"
+                  fill={active ? "white" : "#777"}
+                >
+                  {label}
+                </text>
+              )}
+            </g>
           );
         })}
       </svg>

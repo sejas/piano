@@ -5,12 +5,12 @@ import { getFrequency } from "../constants/frequencies";
 export function usePlayNote() {
   const audioCtxRef = useRef<AudioContext | null>(null);
 
-  return useCallback((name: NoteName, octave: Octave) => {
+  return useCallback((name: NoteName, octave: Octave, sharp?: boolean) => {
     if (!audioCtxRef.current) {
       audioCtxRef.current = new AudioContext();
     }
     const ctx = audioCtxRef.current;
-    const freq = getFrequency(name, octave);
+    const freq = getFrequency(name, octave, sharp);
     const duration = 0.3;
 
     const osc1 = ctx.createOscillator();

@@ -47,7 +47,7 @@ function parseToken(
     return { element: { type: "rest", duration }, error: null };
   }
 
-  const match = token.match(/^([a-zA-Z]+)(\d)?\/?([a-zA-Z])?$/i);
+  const match = token.match(/^([a-zA-Z]+)(#)?(\d)?\/?([a-zA-Z])?$/i);
   if (!match) {
     return {
       element: null,
@@ -55,7 +55,7 @@ function parseToken(
     };
   }
 
-  const [, rawName, rawOctave, rawDuration] = match;
+  const [, rawName, rawSharp, rawOctave, rawDuration] = match;
   const name = resolveNoteName(rawName);
   if (!name) {
     return {
@@ -63,6 +63,7 @@ function parseToken(
       error: { token, index, message: `Unknown token: ${token}` },
     };
   }
+  const sharp = rawSharp === "#";
 
   let octave: Octave = 4;
   if (rawOctave) {
@@ -81,7 +82,13 @@ function parseToken(
   }
 
   return {
-    element: { type: "note", name, octave, duration },
+    element: {
+      type: "note",
+      name,
+      sharp: sharp || undefined,
+      octave,
+      duration,
+    },
     error: null,
   };
 }
