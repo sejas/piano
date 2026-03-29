@@ -152,19 +152,21 @@ function renderNote(
     );
   });
 
-  // Sharp symbol
+  // Sharp symbol (♯)
   if (note.sharp) {
+    const sharpX = x - noteHeadRx - 8;
     elements.push(
       <text
         key={`${key}-sharp`}
-        x={x - noteHeadRx - 10}
-        y={y + 4}
-        fontSize="14"
+        x={sharpX}
+        y={y + 5}
+        fontSize="16"
+        fontFamily="serif"
         fontWeight="bold"
         fill="#333"
         textAnchor="middle"
       >
-        #
+        ♯
       </text>,
     );
   }
