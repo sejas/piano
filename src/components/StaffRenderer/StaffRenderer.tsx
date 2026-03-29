@@ -81,9 +81,7 @@ function renderTrebleClef(offsetY: number) {
   const staffHeight = 4 * STAFF_CONFIG.lineSpacing; // 40px
   const clefHeight = staffHeight * 3.2; // clef is ~3.2x staff height
   const sourceHeight = 12800;
-  const sourceWidth = 6400;
   const scale = clefHeight / sourceHeight;
-  const clefWidth = sourceWidth * scale;
 
   // G4 line is 3rd from bottom = topLineY + 3*lineSpacing
   const gLineY = offsetY + STAFF_CONFIG.topLineY + 3 * STAFF_CONFIG.lineSpacing;
